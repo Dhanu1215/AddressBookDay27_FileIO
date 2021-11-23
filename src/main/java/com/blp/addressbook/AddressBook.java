@@ -8,31 +8,37 @@ import java.util.stream.Stream;
 
 public class AddressBook {
     private static final ArrayList<Contacts> list = new ArrayList<Contacts>();
+
     /**
      * Write a file using io.FileWriter
+     *
      * @throws IOException
      */
-    public static void writeFile() throws IOException{
-        FileWriter fw = new FileWriter("addressbook.txt");
-        for (Contacts str : list){
-            fw.write("Firstname:: "+str.getFirstName());
-            fw.write('\n');
-            fw.write("Lastname:: "+str.getLastName());
-            fw.write('\n');
-            fw.write("Address:: "+str.getAddress());
-            fw.write('\n');
-            fw.write("City:: "+str.getCity());
-            fw.write('\n');
-            fw.write("State:: "+str.getState());
-            fw.write('\n');
-            fw.write("Zip:: "+str.getZip());
-            fw.write('\n');
-            fw.write("Phone number:: "+(long) str.getPhoneNumber());
-            fw.write('\n');
-            fw.write("Email:: "+str.getEmail());
-            fw.write('\n');
-            fw.flush();
-            fw.close();
+    public static void writeFile() throws IOException {
+        try {
+            FileWriter fw = new FileWriter("addressbook.txt",true);
+            for (Contacts str : list) {
+                fw.write("Firstname:: " + str.getFirstName());
+                fw.write('\n');
+                fw.write("Lastname:: " + str.getLastName());
+                fw.write('\n');
+                fw.write("Address:: " + str.getAddress());
+                fw.write('\n');
+                fw.write("City:: " + str.getCity());
+                fw.write('\n');
+                fw.write("State:: " + str.getState());
+                fw.write('\n');
+                fw.write("Zip:: " + str.getZip());
+                fw.write('\n');
+                fw.write("Phone number:: " + (long) str.getPhoneNumber());
+                fw.write('\n');
+                fw.write("Email:: " + str.getEmail());
+                fw.write('\n');
+                fw.flush();
+                fw.close();
+            }
+        } catch (IOException e) {
+            e.getMessage();
         }
     }
 
@@ -40,7 +46,8 @@ public class AddressBook {
      * Call method to sort entry in contact by city
      */
     private void sortByCity() {
-        List<Contacts> check = list.stream().sorted(Comparator.comparing(str->str.getCity())).collect(Collectors.toList());;
+        List<Contacts> check = list.stream().sorted(Comparator.comparing(str -> str.getCity())).collect(Collectors.toList());
+        ;
         check.forEach(str -> System.out.println(str.toString()));
     }
 
@@ -48,7 +55,8 @@ public class AddressBook {
      * Call method to sort entry in contact by firstname
      */
     private void sortByFirstname() {
-        List<Contacts> check = list.stream().sorted(Comparator.comparing(str->str.getFirstName())).collect(Collectors.toList());;
+        List<Contacts> check = list.stream().sorted(Comparator.comparing(str -> str.getFirstName())).collect(Collectors.toList());
+        ;
         check.forEach(str -> System.out.println(str.toString()));
     }
 
@@ -217,6 +225,7 @@ public class AddressBook {
                 case 1:
                     if (choice == 1) {
                         book1.AddContactsDetails();
+                        writeFile();
                     } else if (choice == 2) {
                         book1.editContact();
                     } else if (choice == 3) {
@@ -231,8 +240,6 @@ public class AddressBook {
                         book1.getCountByCity();
                     } else if (choice == 8) {
                         book1.sortByFirstname();
-                    } else if (choice == 9) {
-                        book1.sortByCity();
                     }
                     break;
                 case 2:
@@ -273,7 +280,6 @@ public class AddressBook {
                     System.out.println("Invalid input");
                     break;
             }
-            writeFile();
             System.out.println("1. AddressBook 1");
             System.out.println("2. AddressBook 2");
             System.out.println("3. AddressBook 3");
