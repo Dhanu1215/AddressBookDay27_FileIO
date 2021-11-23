@@ -11,7 +11,6 @@ public class AddressBook {
 
     /**
      * Write a file using io.FileWriter
-     *
      * @throws IOException
      */
     public static void writeFile() throws IOException {
