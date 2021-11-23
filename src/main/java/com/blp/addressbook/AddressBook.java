@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 public class AddressBook {
     private static final ArrayList<Contacts> list = new ArrayList<Contacts>();
-
     /**
      * Write a file using io.FileWriter
      * @throws IOException
