@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class AddressBook {
+
     private static final ArrayList<Contacts> list = new ArrayList<Contacts>();
     /**
      * Read a file using io.FileReader
