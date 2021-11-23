@@ -1,5 +1,6 @@
 package com.blp.addressbook;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -8,14 +9,26 @@ import java.util.stream.Stream;
 
 public class AddressBook {
     private static final ArrayList<Contacts> list = new ArrayList<Contacts>();
-
+    /**
+     * Read a file using io.FileReader
+     * @throws IOException
+     */
+    public static void readFile() throws IOException {
+        FileReader fr = new FileReader("addressbook.txt");
+        int i = fr.read();
+        while (i != -1){
+            System.out.print((char) i);
+            i = fr.read();
+        }
+        fr.close();
+    }
     /**
      * Write a file using io.FileWriter
      * @throws IOException
      */
     public static void writeFile() throws IOException {
         try {
-            FileWriter fw = new FileWriter("addressbook.txt",true);
+            FileWriter fw = new FileWriter("addressbook.txt", true);
             for (Contacts str : list) {
                 fw.write("Firstname:: " + str.getFirstName());
                 fw.write('\n');
@@ -225,6 +238,7 @@ public class AddressBook {
                     if (choice == 1) {
                         book1.AddContactsDetails();
                         writeFile();
+                        readFile();
                     } else if (choice == 2) {
                         book1.editContact();
                     } else if (choice == 3) {
